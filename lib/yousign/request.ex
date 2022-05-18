@@ -13,7 +13,7 @@ defmodule Yousign.Request do
       |> Finch.build(url, [{"Authorization", "Bearer #{Config.resolve(:api_key)}"}])
       |> Finch.request(Yousign.API)
 
-    Jason.decode!(Map.get(res, :body))
+    Jason.decode!(Map.get(res, :body), keys: :atoms)
   end
 
   def base_url() do
