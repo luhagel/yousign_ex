@@ -5,12 +5,23 @@ defmodule Yousign.Request do
 
   alias Yousign.Config
 
-  def make_request(method \\ :get, endpoint \\ "", args \\ []) do
+  def make_request(:get, endpoint, args \\ []) do
     url = "#{base_url()}/#{endpoint}"
 
     {:ok, res} =
       method
       |> Finch.build(url, [{"Authorization", "Bearer #{Config.resolve(:api_key)}"}])
+      |> Finch.request(Yousign.API)
+
+    Jason.decode!(Map.get(res, :body), keys: :atoms)
+  end
+
+  def make_request(method, endpoint, body, args \\ []) do
+    url = "#{base_url()}/#{endpoint}"
+
+    {:ok, res} =
+      method
+      |> Finch.build(url, [{"Authorization", "Bearer #{Config.resolve(:api_key)}"}], body)
       |> Finch.request(Yousign.API)
 
     Jason.decode!(Map.get(res, :body), keys: :atoms)
