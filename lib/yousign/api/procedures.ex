@@ -22,12 +22,12 @@ defmodule Yousign.API.Procedures do
   @doc """
   Builds a API Procedure payload with the provided info, sets a lot of defaults
   """
-  def build_procedure(info, members, file, config \\ %{}) do
+  def build_procedure(info, members, config \\ %{}) do
     %{
       name: Map.get(info, :name),
       description: Map.get(info, :description, ""),
       ordered: true,
-      members: Enum.map(members, fn member -> Map.put(member, :fileObjects, [file]) end),
+      members: members,
       config: config
     }
   end
