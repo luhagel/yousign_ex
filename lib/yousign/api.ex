@@ -17,6 +17,7 @@ defmodule Yousign.API do
   end
 
   def get_api_url, do: Request.base_url()
+  def get_web_url, do: Request.web_url()
 
   defp pool_size, do: 25
 end

@@ -41,4 +41,12 @@ defmodule Yousign.Request do
       "https://api.yousign.com"
     end
   end
+
+  def web_url() do
+    if(Config.resolve(:use_sandbox, false)) do
+      "https://staging-app.yousign.com"
+    else
+      "https://app.yousign.com"
+    end
+  end
 end
