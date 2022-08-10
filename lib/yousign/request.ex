@@ -34,6 +34,20 @@ defmodule Yousign.Request do
     Jason.decode!(Map.get(res, :body), keys: :atoms)
   end
 
+  def make_raw_request(:get, endpoint) do
+    url = "#{base_url()}/#{endpoint}"
+
+    {:ok, res} =
+      :get
+      |> Finch.build(url, [{"Authorization", "Bearer #{Config.resolve(:api_key)}"}])
+      |> Finch.request(Yousign.API)
+
+    case Map.get(res, :body) do
+      nil -> {:error, "No response"}
+      body -> {:ok, body}
+    end
+  end
+
   def make_raw_request(method, endpoint, body) do
     url = "#{base_url()}/#{endpoint}"
 
