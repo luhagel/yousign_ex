@@ -49,7 +49,10 @@ defmodule Yousign.Request do
       )
       |> Finch.request(Yousign.API)
 
-    Map.get(res, :body)
+    case Map.get(res, :body) do
+      nil -> {:error, "No response"}
+      body -> {:ok, body}
+    end
   end
 
   def base_url() do
