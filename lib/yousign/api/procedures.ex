@@ -7,6 +7,11 @@ defmodule Yousign.API.Procedures do
   def list, do: make_request(:get, "procedures")
 
   @doc """
+  Get a procedure
+  """
+  def get(id), do: make_request(:get, id)
+
+  @doc """
   Lists all procedures by member email
   """
   def list_by_member_email(email), do: make_request(:get, "procedures?member.email=#{email}")
