@@ -35,11 +35,11 @@ defmodule Yousign.API.Files do
 
   def get_file_content(id, :base64) do
     :get
-    |> make_request("files", "#{id}/download")
+    |> make_raw_request("files", "#{id}/download")
   end
 
   def get_file_content(id, :binary) do
     :get
-    |> make_request("files", "#{id}/download?alt=media")
+    |> make_raw_request("files", "#{id}/download?alt=media")
   end
 end

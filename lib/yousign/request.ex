@@ -34,6 +34,24 @@ defmodule Yousign.Request do
     Jason.decode!(Map.get(res, :body), keys: :atoms)
   end
 
+  def make_raw_request(method, endpoint, body) do
+    url = "#{base_url()}/#{endpoint}"
+
+    {:ok, res} =
+      method
+      |> Finch.build(
+        url,
+        [
+          {"Authorization", "Bearer #{Config.resolve(:api_key)}"},
+          {"Content-Type", "application/json"}
+        ],
+        Jason.encode!(body)
+      )
+      |> Finch.request(Yousign.API)
+
+    Map.get(res, :body)
+  end
+
   def base_url() do
     if(Config.resolve(:use_sandbox, false)) do
       "https://staging-api.yousign.com"
