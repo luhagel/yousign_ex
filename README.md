@@ -1,6 +1,6 @@
 # Yousign
 
-**TODO: Add description**
+A very thin wrapper around the yousign.fr API. Currently limited in scope by what is needed at my work project.
 
 ## Installation
 

@@ -12,7 +12,9 @@ defmodule Yousign.MixProject do
       start_permanent: Mix.env() == :prod,
       deps: deps(),
       docs: docs(),
-      source_url: @source_url
+      source_url: @source_url,
+			package: package(),
+			description: description()
     ]
   end
 
@@ -43,6 +45,22 @@ defmodule Yousign.MixProject do
       {:ex_doc, "~> 0.28.4", only: [:dev, :docs], runtime: false},
       {:finch, "~> 0.12"},
       {:uri_query, "~> 0.1.2"}
+    ]
+  end
+
+	defp description() do
+    "A thin layer around the yousign.fr API"
+  end
+
+  defp package() do
+    [
+      # This option is only needed when you don't want to use the OTP application name
+      name: "yousign_ex",
+      # These are the default files included in the package
+      files: ~w(lib priv .formatter.exs mix.exs README* readme* LICENSE*
+                license* CHANGELOG* changelog* src),
+      licenses: ["Apache-2.0"],
+      links: %{"GitHub" => "https://github.com/luhagel/yousign_ex"}
     ]
   end
 end
