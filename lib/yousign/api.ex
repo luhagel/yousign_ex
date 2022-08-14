@@ -3,10 +3,7 @@ defmodule Yousign.API do
   Yousign API Module
   """
 
-  alias Yousign.Config
   alias Yousign.Request
-
-  alias Finch.Response
 
   def child_spec do
     {Finch,
