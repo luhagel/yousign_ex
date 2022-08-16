@@ -81,7 +81,7 @@ defmodule Yousign.Request do
     if(Config.resolve(:use_sandbox, false)) do
       "https://staging-app.yousign.com"
     else
-      "https://app.yousign.com"
+      "https://webapp.yousign.com"
     end
   end
 end
