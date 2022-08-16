@@ -2,7 +2,7 @@ defmodule Yousign.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/luhagel/yousign_ex"
-  @version "0.1.0"
+  @version "0.1.1"
 
   def project do
     [
@@ -13,8 +13,8 @@ defmodule Yousign.MixProject do
       deps: deps(),
       docs: docs(),
       source_url: @source_url,
-			package: package(),
-			description: description()
+      package: package(),
+      description: description()
     ]
   end
 
@@ -48,7 +48,7 @@ defmodule Yousign.MixProject do
     ]
   end
 
-	defp description() do
+  defp description() do
     "A thin layer around the yousign.fr API"
   end
 
