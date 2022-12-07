@@ -13,8 +13,8 @@ defmodule Yousign.MixProject do
       deps: deps(),
       docs: docs(),
       source_url: @source_url,
-			package: package(),
-			description: description()
+      package: package(),
+      description: description()
     ]
   end
 
@@ -41,14 +41,14 @@ defmodule Yousign.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:jason, "~> 1.3"},
-      {:ex_doc, "~> 0.28.4", only: [:dev, :docs], runtime: false},
-      {:finch, "~> 0.12"},
+      {:jason, "~> 1.4"},
+      {:ex_doc, "~> 0.29", only: [:dev, :docs], runtime: false},
+      {:finch, "~> 0.14"},
       {:uri_query, "~> 0.1.2"}
     ]
   end
 
-	defp description() do
+  defp description() do
     "A thin layer around the yousign.fr API"
   end
 
