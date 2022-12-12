@@ -2,7 +2,7 @@ defmodule Yousign.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/luhagel/yousign_ex"
-  @version "0.1.1"
+  @version "0.2.0"
 
   def project do
     [
@@ -44,7 +44,10 @@ defmodule Yousign.MixProject do
       {:jason, "~> 1.4"},
       {:ex_doc, "~> 0.29", only: [:dev, :docs], runtime: false},
       {:finch, "~> 0.14"},
-      {:uri_query, "~> 0.1.2"}
+      {:multipart, "~> 0.3.1"},
+      {:uri_query, "~> 0.1.2"},
+      {:temp, "~> 0.4"},
+      {:typed_struct, "~> 0.3.0"}
     ]
   end
 
