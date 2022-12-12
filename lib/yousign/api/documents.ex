@@ -51,7 +51,7 @@ defmodule Yousign.API.Documents do
       )
       |> Multipart.add_part(Part.file_field(path, :file))
 
-    case make_multipart_request(:post, "documents", body) do
+    case make_multipart_request(:post, "documents", body, 201) do
       {:ok, data} ->
         File.rm!(path)
         {:ok, data}
@@ -80,7 +80,8 @@ defmodule Yousign.API.Documents do
     case make_multipart_request(
            :post,
            "signature_requests/#{signature_request_id}/documents",
-           body
+           body,
+           201
          ) do
       {:ok, data} ->
         File.rm!(path)
