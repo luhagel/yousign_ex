@@ -48,7 +48,6 @@ defmodule Yousign.Request do
         ],
         Jason.encode!(body)
       )
-      |> IO.inspect()
       |> Finch.request(Yousign.API)
 
     case res do
@@ -77,7 +76,6 @@ defmodule Yousign.Request do
         headers,
         {:stream, body_stream}
       )
-      |> IO.inspect()
       |> Finch.request(Yousign.API)
 
     case res do
