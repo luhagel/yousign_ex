@@ -1,6 +1,7 @@
 defmodule Yousign.API.Documents do
   import Yousign.Request
 
+  alias Yousign.Document
   alias Multipart.Part
   alias Yousign.DocumentInput
 
@@ -39,7 +40,7 @@ defmodule Yousign.API.Documents do
   @doc """
   Creates a new document
   """
-  @spec create(%DocumentInput{}) :: {:error, any()} | {:ok, any()}
+  @spec create(%DocumentInput{}) :: {:error, any()} | {:ok, %Document{}}
   def create(body) do
     {:ok, path} = base64_to_file(body.file)
 
@@ -65,7 +66,8 @@ defmodule Yousign.API.Documents do
   @doc """
   Creates a new document and adds it to the given signature request
   """
-  @spec add_to_signature_request(String.t(), %DocumentInput{}) :: {:error, any()} | {:ok, any()}
+  @spec add_to_signature_request(String.t(), %DocumentInput{}) ::
+          {:error, any()} | {:ok, %Document{}}
   def add_to_signature_request(signature_request_id, body) do
     {:ok, path} = base64_to_file(body.file)
 

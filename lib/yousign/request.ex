@@ -84,41 +84,6 @@ defmodule Yousign.Request do
     end
   end
 
-  def make_raw_request(:get, endpoint) do
-    url = "#{base_url()}/#{endpoint}"
-
-    {:ok, res} =
-      :get
-      |> Finch.build(url, [{"Authorization", "Bearer #{Config.resolve(:api_key)}"}])
-      |> Finch.request(Yousign.API)
-
-    case Map.get(res, :body) do
-      nil -> {:error, "No response"}
-      body -> {:ok, body}
-    end
-  end
-
-  def make_raw_request(method, endpoint, body) do
-    url = "#{base_url()}/#{endpoint}"
-
-    {:ok, res} =
-      method
-      |> Finch.build(
-        url,
-        [
-          {"Authorization", "Bearer #{Config.resolve(:api_key)}"},
-          {"Content-Type", "application/json"}
-        ],
-        Jason.encode!(body)
-      )
-      |> Finch.request(Yousign.API)
-
-    case Map.get(res, :body) do
-      nil -> {:error, "No response"}
-      body -> {:ok, body}
-    end
-  end
-
   @doc """
   Returns the base URL for the Yousign API based on the current envorinment
   """
