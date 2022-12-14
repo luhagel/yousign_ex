@@ -40,8 +40,8 @@ defmodule Yousign.API.Documents do
   @doc """
   Creates a new document
   """
-  @spec create(%DocumentInput{}) :: {:error, any()} | {:ok, %Document{}}
-  def create(body) do
+  @spec create(%DocumentInput{}, String.t() | boolean()) :: {:error, any()} | {:ok, %Document{}}
+  def create(body, filename \\ true) do
     {:ok, path} = base64_to_file(body.file)
 
     body =
@@ -50,7 +50,7 @@ defmodule Yousign.API.Documents do
       |> Multipart.add_part(
         Part.text_field(to_string(Map.get(body, :parse_anchors, false)), :parse_anchors)
       )
-      |> Multipart.add_part(Part.file_field(path, :file))
+      |> Multipart.add_part(Part.file_field(path, :file, filename: filename))
 
     case make_multipart_request(:post, "documents", body, 201) do
       {:ok, data} ->
@@ -66,9 +66,9 @@ defmodule Yousign.API.Documents do
   @doc """
   Creates a new document and adds it to the given signature request
   """
-  @spec add_to_signature_request(String.t(), %DocumentInput{}) ::
+  @spec add_to_signature_request(String.t(), %DocumentInput{}, String.t() | boolean()) ::
           {:error, any()} | {:ok, %Document{}}
-  def add_to_signature_request(signature_request_id, body) do
+  def add_to_signature_request(signature_request_id, body, filename \\ true) do
     {:ok, path} = base64_to_file(body.file)
 
     body =
@@ -77,7 +77,7 @@ defmodule Yousign.API.Documents do
       |> Multipart.add_part(
         Part.text_field(to_string(Map.get(body, :parse_anchors, false)), :parse_anchors)
       )
-      |> Multipart.add_part(Part.file_field(path, :file))
+      |> Multipart.add_part(Part.file_field(path, :file, filename: filename))
 
     case make_multipart_request(
            :post,
