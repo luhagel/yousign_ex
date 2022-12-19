@@ -22,7 +22,7 @@ defmodule Yousign.API.Documents do
   end
 
   @doc """
-  List all documents
+  List all documents in a signature request
 
   ## Examples
 
@@ -93,6 +93,26 @@ defmodule Yousign.API.Documents do
         File.rm!(path)
         {:error, error}
     end
+  end
+
+  @doc """
+  Downloads all the documents attached to a signature request
+
+  Version Options:
+    - :completed: downloads the completed version of the documents
+    - :current: downloads the current version of the documents
+
+  Defaults to :current
+  """
+  @spec download(String.t(), atom()) :: {:error, any()} | {:ok, any()}
+  def download(signature_request_id, version \\ :current)
+
+  def download(signature_request_id, :completed) do
+    make_request(:get, "signature_requests/#{signature_request_id}/documents/download")
+  end
+
+  def download(signature_request_id, :current) do
+    make_request(:get, "signature_requests/#{signature_request_id}/documents/download")
   end
 
   @spec base64_to_file(String.t()) :: {:error, any()} | {:ok, String.t()}
