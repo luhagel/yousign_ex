@@ -108,11 +108,17 @@ defmodule Yousign.API.Documents do
   def download(signature_request_id, version \\ :current)
 
   def download(signature_request_id, :completed) do
-    make_request(:get, "signature_requests/#{signature_request_id}/documents/download")
+    make_request(
+      :get,
+      "signature_requests/#{signature_request_id}/documents/download?version=completed"
+    )
   end
 
   def download(signature_request_id, :current) do
-    make_request(:get, "signature_requests/#{signature_request_id}/documents/download")
+    make_request(
+      :get,
+      "signature_requests/#{signature_request_id}/documents/download?version=current"
+    )
   end
 
   @spec base64_to_file(String.t()) :: {:error, any()} | {:ok, String.t()}
