@@ -1,3 +1,7 @@
+## 0.2.3
+
+- Add better error loggin
+
 ## 0.2.2
 
 - Add a `Yousign.API.Documents.download/2` method to download documents

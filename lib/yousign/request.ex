@@ -80,7 +80,7 @@ defmodule Yousign.Request do
 
     case res do
       %{status: ^success_status_code} -> {:ok, Jason.decode!(Map.get(res, :body), keys: :atoms)}
-      _ -> {:error, res.status}
+      _ -> {:error, {res.status, Jason.decode!(Map.get(res, :body), keys: :atoms)}}
     end
   end
 

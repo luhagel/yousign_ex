@@ -2,7 +2,7 @@ defmodule Yousign.MixProject do
   use Mix.Project
 
   @source_url "https://github.com/luhagel/yousign_ex"
-  @version "0.2.2"
+  @version "0.2.3"
 
   def project do
     [
